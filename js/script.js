@@ -1,20 +1,48 @@
-function saveSubmission() {
-	var Submission = Parse.Object.extend("Submission");
-    var newSubmission = new Submission();
-    newSubmission.set("title", $('#title').val());
+var Submission = Parse.Object.extend("Submission");
 
-    newSubmission.save(null, {
-    	success: function(newSubmission) {
-    		alert('success');
-    	},
-    	error: function(newSubmission, error) {
-    		alert('failed' + error.message);
-    	}
-    });
+function saveSubmission() {
+	var newSubmission = new Submission();
+	newSubmission.save({
+		title: $('#title').val(),
+ 		author: $('#author').val(),
+  		summary: $('#summary').val()
+	}, {
+  		success: function(newSubmission) {
+	    	// The object was saved successfully.
+	    	alert("success" + newSubmission.id);
+	 	},
+		 error: function(newSubmission, error) {
+		    // The save failed.
+		    // error is a Parse.Error with an error code and message.
+		    alert("failure" + error);
+		}
+	});
+}
+
+function retrieveSubmissions() {
+	var query = new Parse.Query(Submission);
+	query.find({
+		success: function(results) {
+			for (var i = 0; i < results.length; i++) {
+				console.log(results[i].attributes);
+				$('.submissions').append('<p>' + results[i].attributes.title + '</p><p>' + results[i].attributes.author + '</p><p>' + results[i].attributes.summary + '</p>');
+			}
+		},
+		error: function(query, error) {
+			alert('error');
+		}
+	});
+	console.log(query);
+}
+
+function loadEmoji() {
+	$.getScript('js/emoji.min.js', function() {
+		console.log('emoji loaded');
+	});
 }
 
 $(document).ready(function() {
-	Parse.initialize("EZIUjGYVtDlR4AQn9K4Pwut7vecs8QXeiKQ35ddN", "M2q3CiIGfvcOWlkowa3U2oeP5UFTMVaACh1xMcEI");
-
+	
+	//retrieveSubmissions();
 	$('#submit').on('click', saveSubmission);
 });

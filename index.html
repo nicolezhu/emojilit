@@ -6,46 +6,26 @@
 		<title>EmojiLit</title>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.3.0.min.js"></script>
-		
-		<!--<script src="js/script.js"></script>-->
+		<script src="js/script.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	</head>
 	<body>
 		<h1>EmojiLit</h1>
 		<h2>Book summaries in emoji</h2>
-		<form>
+		<div class="submissions">
+		</div>
+		<div class="form">
 			<p>Book title: <br><input type="text" name="title" id="title"></p>
 			<p>Author: <br><input type="text" name="author" id="author"></p>
-			<p>Summary: <br><input type="text" name="summary" id="summary"></p>
-			<input type="submit" value="Submit" id="submit">
-		</form>
-		<p>:dog:</p>
-		
-    <script type="text/javascript">
-		    Parse.initialize("EZIUjGYVtDlR4AQn9K4Pwut7vecs8QXeiKQ35ddN", "M2q3CiIGfvcOWlkowa3U2oeP5UFTMVaACh1xMcEI");
-
-		    var Submission = Parse.Object.extend("Submission");
-			var newSubmission = new Submission();
-			 
-			newSubmission.save({
-			  title: "1337",
-			  author: "Sean Plott",
-			  summary: "blablabla"
-			}, {
-			  success: function(newSubmission) {
-			    // The object was saved successfully.
-			    alert("success" + newSubmission.id);
-			  },
-			  error: function(newSubmission, error) {
-			    // The save failed.
-			    // error is a Parse.Error with an error code and message.
-			    alert("failure");
-			  }
-			});
-
-		    $('#submit').on('click', saveSubmission);
-		  </script>
-		<script src="/js/emoji.min.js"></script>
+			<p>Summary: <br><textarea id="summary"></textarea></p>
+			<button id="submit">Submit</button>
+		</div>
+		<p>:grapes: :grapes: :grapes: :older_man:</p>
+		<script>
+			Parse.initialize("EZIUjGYVtDlR4AQn9K4Pwut7vecs8QXeiKQ35ddN", "M2q3CiIGfvcOWlkowa3U2oeP5UFTMVaACh1xMcEI");
+			retrieveSubmissions();
+		</script>
+		<!--<script src="js/emoji.min.js"></script>-->
 	</body>
 	
 </html>
