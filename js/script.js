@@ -26,7 +26,11 @@ function retrieveSubmissions() {
 			for (var i = 0; i < results.length; i++) {
 				console.log(results[i].attributes);
 				$('.submissions').append('<p>' + results[i].attributes.title + '</p><p>' + results[i].attributes.author + '</p><p>' + results[i].attributes.summary + '</p>');
-			}
+
+				if (i == (results.length - 1)) {
+					loadEmoji();
+				}
+			};
 		},
 		error: function(query, error) {
 			alert('error');
